@@ -1,0 +1,55 @@
+7x-ohio-deployment-details
+
+DB-URL ---------- 7x-openips-db-ohio.3ccloud.com
+
+3CCl0g1c@7x-openips-db-ohio.3ccloud.com
+
+registrar-7x-ohio.3ccloud.com - weighted policy - for both servers
+
+freeswitch-7x-ohio.3ccloud.com - IP needs to be added behind this domain
+
+
+carrier--------------------------------------------------------------------------------------CONFIG
+
+DB configuration done on 
+insert into domain (domain,last_modified) values('ec2-3-141-10-113.3ccloud.com','2024-03-05 00:00:01');
+insert into rtpengine (id,socket,set_id) values ('1','udp:192.168.34.164:22000=0','1');
+
+server related configurations
+carrier-7x-asterisk.i3clogic.com, eks-carrier-7x-eqa.i3clogic.com - What to do
+
+carrier-7x-ohio-prod.3ccloud.com   ----   ec2-18-116-160-175.3ccloud.com - carrier-server-1
+ec2-3-20-51-93.3ccloud.com - carrier-server-2
+
+
+
+RTP engine config -----------------------------------------------------------------------------------
+
+
+UPDATE domain SET domain = "carrier-7x-ohio-prod.3ccloud.com" WHERE id = 1;
+
+
+Registrar server config -----------------------------------------------------------------------------
+
+insert into domain (domain,last_modified) values("registrar-7x-ohio.3ccloud.com","2024-03-06 00:00:01");
+
+
+
+
+
+
+
+
+
+
+
+
+check process opensips-gateway with pidfile /var/run/opensips_gateway7x.pid
+   start program = "/etc/init.d/opensips-gateway opensipsstart"
+   stop  program = "/etc/init.d/opensips-gateway opensipsstop"
+
+
+check process opensips-registrar with pidfile /var/run/opensips_registrar7x.pid
+   start program = "/etc/init.d/opensips-registrar opensipsstart"
+   stop  program = "/etc/init.d/opensips-registrar opensipsstop"
+
